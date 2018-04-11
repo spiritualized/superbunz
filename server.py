@@ -109,11 +109,11 @@ def api():
 		other = format_results(results, user)
 
 		saved = []
-		results = db.session.query(UserStory).filter_by(token=user.token).all()
+		results = db.session.query(UserStory).filter_by(token=user.token)
 		for result in results:
 			saved.append(result.story_id)
 
-		results = db.session.query(Story).filter(Story.story_id.in_(saved)).all()
+		results = db.session.query(Story).filter(Story.story_id.in_(saved)).order_by(Story.posted.desc()).all()
 		saved = format_results(results, user)
 
 		query = db.session.query(Story).order_by(Story.posted.desc())
