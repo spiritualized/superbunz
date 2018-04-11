@@ -1,0 +1,12 @@
+mysql_host = "localhost"
+mysql_db = ""
+mysql_username = ""
+mysql_password = ""
+use_mysql = True
+
+fb_email = ""
+fb_password = ""
+
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
+secret_key = ""
+debug = True
