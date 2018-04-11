@@ -1,0 +1,19 @@
+.row :nth-child(even){
+  background-color: #dcdcdc;
+}
+.row :nth-child(odd){
+  background-color: #aaaaaa;
+}
+
+.details-table td {
+	padding:0px 0px 12px 0px;
+	border-top:none;
+}
+
+.cost-td {
+	color:green;
+}
+
+th {
+	border-top:none!important;
+}

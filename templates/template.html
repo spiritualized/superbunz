@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+
+	<title>Super Bunz</title>
+
+	<link rel="stylesheet" href="/static/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/style.css">
+	</head>
+	<body>
+
+		<div class="container" style="max-width: 800px; margin-left:auto; margin-right:auto;">
+			<img src="/static/bunz.png" class="img-fluid" />
+			<div style="width:100%; font-size:10px; display:table;position:relative;top:-15px;">
+				<div style="display:table-cell;width:33%;">Version: <span id="version"></span></div>
+				<div style="display:table-cell;width:34%; text-align:center;">Users online: <span id="users-online">0</span></div>
+				<div style="display:table-cell;width:33%; text-align:right;">Last refreshed: <span id="last-updated"></span></div>
+			</div>
+			<div style="width:100%; font-size:12px; display:inline-block; text-align:right;">
+				<div style="display:inline-block; margin-right:10px;">Hide sold: <input type="checkbox" id="hide-sold" /></div>
+				<div style="display:inline-block;">Max cost: $<input type="text" id="max-cost" style="width:50px;" /></div>
+			</div>
+
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="offers-tab" data-toggle="tab" href="#offers" role="tab" aria-controls="home" aria-selected="true">Offers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="profile" aria-selected="false">Wanted/Other</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="saved-tab" data-toggle="tab" href="#saved" role="tab" aria-controls="contact" aria-selected="false">Saved</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane show active" id="offers" role="tabpanel" aria-labelledby="home-tab">
+					<table class="table" id="table-offers" style="max-width: 800px; font-size:13px; table-layout: fixed;">
+						<thead>
+							<tr>
+								<th style="width:100px;">Poster</th>
+								<th>Description</th>
+								<th style="width:100px;">Details</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="tab-pane " id="other" role="tabpanel" aria-labelledby="profile-tab">
+					<table class="table" id="table-other" style="max-width: 800px; font-size:13px; table-layout: fixed;">
+						<thead>
+							<tr>
+								<th style="width:100px;">Poster</th>
+								<th>Description</th>
+								<th style="width:100px;">Details</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="tab-pane " id="saved" role="tabpanel" aria-labelledby="contact-tab">
+					<table class="table" id="table-saved" style="max-width: 800px; font-size:13px; table-layout: fixed;">
+						<thead>
+							<tr>
+								<th style="width:100px;">Poster</th>
+								<th>Description</th>
+								<th style="width:100px;">Details</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+		</div>
+
+		<script src="/static/jquery-3.3.1.min.js"></script>
+	<script src="/static/popper.min.js"></script>
+	<script src="/static/bootstrap.min.js"></script>
+	<script src="/static/strftime.min.js"></script>
+	<script src="/static/jquery.ba-throttle-debounce.min.js"></script>
+	<script src="/static/ajax.js?v={{version}}"></script>
+	</body>
+</html>
