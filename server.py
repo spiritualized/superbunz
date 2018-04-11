@@ -16,6 +16,7 @@ version = '1.0.1'
 
 # db stuff
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{0}:{1}@{2}/{3}?charset=utf8mb4".format(mysql_username, mysql_password, mysql_host, mysql_db)
+app.config['APPLICATION_ROOT'] = application_root
 db = SQLAlchemy(app)
 
 @app.route('/')
