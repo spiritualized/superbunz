@@ -12,8 +12,7 @@ from dbstuff import *
 app = Flask(__name__, static_folder='static')
 app.debug = True
 app.secret_key = secret_key
-version = '1.0.1'
-version = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+version = '1.0.2'
 
 # db stuff
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{0}:{1}@{2}/{3}?charset=utf8mb4".format(mysql_username, mysql_password, mysql_host, mysql_db)
