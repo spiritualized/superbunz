@@ -1,4 +1,4 @@
-import json, uuid, datetime, math
+import json, uuid, datetime, math, random, string
 
 from flask import Flask, render_template, request, make_response
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -13,6 +13,7 @@ app = Flask(__name__, static_folder='static')
 app.debug = True
 app.secret_key = secret_key
 version = '1.0.1'
+version = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
 
 # db stuff
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{0}:{1}@{2}/{3}?charset=utf8mb4".format(mysql_username, mysql_password, mysql_host, mysql_db)
@@ -166,6 +167,7 @@ def api():
 
 if __name__ == '__main__':
 
-	app.run()
+	#app.run()
+	app.run(host= '0.0.0.0')
 
 
