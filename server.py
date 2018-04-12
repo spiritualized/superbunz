@@ -23,7 +23,7 @@ def index():
 
 	token = request.cookies.get("token")
 	user = db.session.query(User).filter_by(token=token).first()
-	response = make_response(render_template("template.html", version=version))
+	response = make_response(render_template("template.html", version=version, google_analytics_id=google_analytics_id))
 
 	if not token or not user:
 		token = str(uuid.uuid4())
