@@ -86,5 +86,16 @@
 	<script src="/static/strftime.min.js"></script>
 	<script src="/static/jquery.ba-throttle-debounce.min.js"></script>
 	<script src="/static/ajax.js?v={{version}}"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id={{google_analytics_id}}"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', '{{google_analytics_id}}');
+	</script>
+
 	</body>
 </html>
