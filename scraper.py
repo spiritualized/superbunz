@@ -91,44 +91,48 @@ def get_pages(limit):
 
 		for story in page_stories:
 
-			# possible bug
-			if not story.has_attr("data-ft"):
+			try:
+				# possible bug
+				if not story.has_attr("data-ft"):
+					continue
+
+				data = json.loads(story["data-ft"])
+
+				# skip promotional posts
+				if "top_level_post_id" not in data:
+					continue
+
+
+				poster = story.find("table", role="presentation").findAll("td")[1].findAll("strong")[0]
+				name = poster.text
+				username = re.search(r"^/([\w\.]*)\?", poster.find("a")["href"]).group(1)
+				posted = parse_age(story.find("abbr").text)
+
+				if username == "profile.php":
+					username = re.search(r"^/profile\.php\?id=([\w\.]*)&", poster.find("a")["href"]).group(1)
+
+				story_id = data["mf_story_key"]
+
+				reactions = story.find(id="like_{0}".format(story_id)).find("a").text
+				if reactions == "Like":
+					reactions = 0
+				reactions = int(reactions)
+
+				picture = story.find("a", href=re.compile(r"^/photo\.php\?fbid="))
+				if picture:
+					picture = picture.find("img")
+				else:
+					picture = ""
+
+				if picture:
+					picture = picture["src"]
+				else:
+					picture = ""
+
+				stories.append({'name':name, 'posted': posted, 'username':username, 'story_id':story_id, 'reactions':reactions, 'picture':picture, 'description':""})
+			except:
 				continue
 
-			data = json.loads(story["data-ft"])
-
-			# skip promotional posts
-			if "top_level_post_id" not in data:
-				continue
-
-
-			poster = story.find("table", role="presentation").findAll("td")[1].findAll("strong")[0]
-			name = poster.text
-			username = re.search(r"^/([\w\.]*)\?", poster.find("a")["href"]).group(1)
-			posted = parse_age(story.find("abbr").text)
-
-			if username == "profile.php":
-				username = re.search(r"^/profile\.php\?id=([\w\.]*)&", poster.find("a")["href"]).group(1)
-
-			story_id = data["mf_story_key"]
-
-			reactions = story.find(id="like_{0}".format(story_id)).find("a").text
-			if reactions == "Like":
-				reactions = 0
-			reactions = int(reactions)
-
-			picture = story.find("a", href=re.compile(r"^/photo\.php\?fbid="))
-			if picture:
-				picture = picture.find("img")
-			else:
-				picture = ""
-
-			if picture:
-				picture = picture["src"]
-			else:
-				picture = ""
-
-			stories.append({'name':name, 'posted': posted, 'username':username, 'story_id':story_id, 'reactions':reactions, 'picture':picture, 'description':""})
 
 		for story in stories:
 			new_story = Story(story['story_id'], story['posted'], story['name'], story['username'], story['reactions'], story['picture'])
