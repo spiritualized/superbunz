@@ -71,7 +71,7 @@ function addToSection(story, section)
 
 function updatePage(data)
 {
-	$.get("/api", {'op': 'get_data'}, function(data){
+	$.get(url_prefix+"/api", {'op': 'get_data'}, function(data){
 		data = JSON.parse(data);
 
 		//date =  new Date()
@@ -111,7 +111,7 @@ function updatePage(data)
 }
 
 $("#hide-sold").change(function(){
-	$.get("/api", {'op': 'hide_sold', 'hide_sold': $(this)[0].checked}, function(data){
+	$.get(url_prefix+"/api", {'op': 'hide_sold', 'hide_sold': $(this)[0].checked}, function(data){
 		updatePage();
 	});
 });
@@ -126,7 +126,7 @@ $("#max-cost").keyup($.debounce(500, function(){
 		$(this)[0].value = max_cost;
 	}
 
-	$.get("/api", {'op': 'max_cost', 'max_cost': max_cost}, function(data){
+	$.get(url_prefix+"/api", {'op': 'max_cost', 'max_cost': max_cost}, function(data){
 		updatePage();
 	});
 }));
@@ -135,7 +135,7 @@ $("#max-cost").keyup($.debounce(500, function(){
 $(document).on("click", ".button-save", function(){
 	button = $(this);
 
-	$.get("/api", {'op': 'save', 'story_id': button.attr('data-story-id'), 'existing':button.attr('data-saved')}, function(data){
+	$.get(url_prefix+"/api", {'op': 'save', 'story_id': button.attr('data-story-id'), 'existing':button.attr('data-saved')}, function(data){
 
 		if(button.attr('data-saved') == 1)
 		{
