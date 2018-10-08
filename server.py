@@ -1,6 +1,6 @@
 import json, uuid, datetime, math, random, string
 
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, Blueprint
 from flask.ext.sqlalchemy import SQLAlchemy
 from functools import wraps
 
@@ -12,18 +12,20 @@ from dbstuff import *
 app = Flask(__name__, static_folder='static')
 app.debug = True
 app.secret_key = secret_key
-version = '1.0.2'
+version = '1.0.3'
 
 # db stuff
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{0}:{1}@{2}/{3}?charset=utf8mb4".format(mysql_username, mysql_password, mysql_host, mysql_db)
 db = SQLAlchemy(app)
 
-@app.route('/')
+blueprint = Blueprint('bunz', __name__, static_folder='static', url_prefix=url_prefix)
+
+@blueprint.route('/')
 def index():
 
 	token = request.cookies.get("token")
 	user = db.session.query(User).filter_by(token=token).first()
-	response = make_response(render_template("template.html", version=version, google_analytics_id=google_analytics_id))
+	response = make_response(render_template("template.html", version=version, google_analytics_id=google_analytics_id, url_prefix=url_prefix))
 
 	if not token or not user:
 		token = str(uuid.uuid4())
@@ -81,7 +83,7 @@ def format_results(results, user):
 
 	return stories
 
-@app.route('/api')
+@blueprint.route('/api')
 def api():
 
 	user = db.session.query(User).filter_by(token=request.cookies.get("token")).first()
@@ -166,7 +168,7 @@ def api():
 
 if __name__ == '__main__':
 
-	#app.run()
-	app.run(host= '0.0.0.0')
+	app.register_blueprint(blueprint)
+	app.run()
 
 
