@@ -1,7 +1,7 @@
 import json, uuid, datetime, math, random, string
 
 from flask import Flask, render_template, request, make_response, Blueprint
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 
 from functions import *
