@@ -31,13 +31,12 @@ def login():
 		    facebook.cookies = pickle.load(f)
 
 	# fetch a test page, checking if we are still logged in using the saved cookies
-	test_page = facebook.get(group_url).text
+	test_page = facebook.get("{0}?view=about".format(group_url)).text
 
 	if "Your Pages" not in test_page:
 		soup = bs4.BeautifulSoup(test_page, "html5lib")
 
-
-		form_fields = soup.find("form", action=re.compile(r"\/login\.php\?")).findAll("input", type="hidden")
+		form_fields = soup.find("form", action=re.compile(r"\/login\/")).findAll("input", type="hidden")
 		
 
 		# log in
