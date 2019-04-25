@@ -200,11 +200,6 @@ def get_pages(limit):
 
 			db.commit()
 
-		new_posts = db.query(Story).all()
-		for new_post in new_posts:
-
-			db.commit()
-
 		print("Scanned page {0}".format(page_num))
 
 
